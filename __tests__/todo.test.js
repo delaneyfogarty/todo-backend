@@ -79,6 +79,20 @@ describe('users', () => {
     const resp = await request(app).get('/api/v1/todos');
     expect(resp.status).toEqual(401);
   });
+
+  it('DELETE /api/v1/todos/:id should delete items for valid user', async () => {
+    const [agent, user] = await registerAndLogin();
+    const todo = await Todo.insert({
+      task_name: 'laundry',
+      user_id: user.id,
+    });
+    const resp = await agent.delete(`/api/v1/todos/${todo.id}`);
+    expect(resp.status).toBe(200);
+
+    const check = await Todo.getById(todo.id);
+    expect(check).toBeNull();
+  });
+
   afterAll(() => {
     pool.end();
   });
