@@ -32,7 +32,7 @@ describe('users', () => {
     return setup(pool);
   });
 
-  it('UPDATE /api/v1/todo/:id should update an item', async () => {
+  it('UPDATE /api/v1/todos/:id should update an item', async () => {
     const [agent, user] = await registerAndLogin();
     const todo = await Todo.insert({
       task_name: 'laundry',
@@ -40,7 +40,7 @@ describe('users', () => {
     });
     const resp = await agent
       .put(`/api/v1/todos/${todo.id}`)
-      .send({ bought: true });
+      .send({ completed: true });
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual({ ...todo, completed: true });
   });
