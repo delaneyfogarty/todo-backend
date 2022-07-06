@@ -60,7 +60,7 @@ describe('users', () => {
   it('GET /api/v1/todos should return all items associated with the authenticated user', async () => {
     const [agent, user] = await registerAndLogin();
     const user2 = await UserService.create(mockUser2);
-    console.log('user2', user2);
+    // console.log('user2', user2);
     const user1Item = await Todo.insert({
       task_name: 'laundry',
       user_id: user.id,
@@ -70,7 +70,7 @@ describe('users', () => {
       user_id: user2.id,
     });
     const resp = await agent.get('/api/v1/todos');
-    console.log(resp.body);
+    // console.log(resp.body);
     expect(resp.status).toEqual(200);
     expect(resp.body).toEqual([user1Item]);
   });
