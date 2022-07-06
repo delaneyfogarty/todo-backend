@@ -1,8 +1,8 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
 
-DROP TABLE IF EXISTS users1 CASCADE;
-DROP TABLE IF EXISTS todos CASCADE;
+DROP TABLE IF EXISTS users1;
+DROP TABLE IF EXISTS todos;
 
 CREATE TABLE users1 (
 	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -14,6 +14,6 @@ CREATE TABLE todos (
 		id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 		user_id BIGINT,
 		task_name VARCHAR NOT NULL,
-		completed BOOLEAN NOT NULL
+		completed BOOLEAN NOT NULL DEFAULT(false)
 );
 
