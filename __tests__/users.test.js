@@ -46,6 +46,16 @@ describe('backend-express-template routes', () => {
     });
   });
 
+  it('signs in an existing user', async () => {
+    await UserService.create(mockUser);
+    const { email, password } = mockUser;
+    const res = await request(app)
+      .post('/api/v1/users/sessions')
+      .send({ email, password });
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({ message: 'Signed in successfully!' });
+  });
+
   afterAll(() => {
     pool.end();
   });
